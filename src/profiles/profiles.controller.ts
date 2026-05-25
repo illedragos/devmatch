@@ -37,16 +37,13 @@ export class ProfilesController {
   //PUT /profile/:id
   @Put(':id')
   update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-    return {
-      id: id,
-      name: updateProfileDto.name,
-      description: updateProfileDto.description,
-    };
+    return this.profilesService.update(id, updateProfileDto);
   }
 
   //DELETE /profiles/:id
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  remove(@Param('id') id: string) {}
+  remove(@Param('id') id: string) {
+    return this.profilesService.delete(id);
+  }
 }
