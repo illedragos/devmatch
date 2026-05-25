@@ -26,7 +26,12 @@ export class ProfilesController {
   // GET /profiles/:id
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.profilesService.findOne(id);
+    try {
+      return this.profilesService.findOne(id);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      throw new NotFoundException(message);
+    }
   }
 
   //POST /profiles
